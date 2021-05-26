@@ -3,6 +3,9 @@ package com.github.novotnyr.android.flagsredux
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 class FlagListFragment : Fragment(R.layout.fragment_flag_list) {
@@ -10,8 +13,10 @@ class FlagListFragment : Fragment(R.layout.fragment_flag_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         flagRecyclerView = view.findViewById(R.id.flagRecyclerView)
-        flagRecyclerView.adapter = FlagListAdapter {
-            TODO("Dopracovať klik na vlajku")
+        flagRecyclerView.adapter = FlagListAdapter { flag ->
+            FlagListFragmentDirections
+                .actionFlagListFragmentToFlagDetailFragment(flag)
+                .let(view.findNavController()::navigate)
         }.apply {
             submitList(listOf(
                 Flag("Austria", R.drawable.austria),
