@@ -1,5 +1,6 @@
 package com.github.novotnyr.android.flagsredux
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -17,6 +18,8 @@ class FlagDetailFragment : Fragment(R.layout.fragment_flag_detail) {
         flagImageView.setImageResource(args.flag.flagResource)
         flagImageView.transitionName = args.flag.country
 
-        sharedElementEnterTransition = MaterialContainerTransform(requireContext(), true)
+        sharedElementEnterTransition = MaterialContainerTransform(requireContext(), true).apply {
+            scrimColor = Color.TRANSPARENT
+        }
     }
 }
