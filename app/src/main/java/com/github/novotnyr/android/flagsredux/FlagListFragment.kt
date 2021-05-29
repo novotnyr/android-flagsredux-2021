@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.transition.MaterialFade
 
 class FlagListFragment : Fragment(R.layout.fragment_flag_list) {
     private lateinit var flagRecyclerView: RecyclerView
@@ -16,7 +18,12 @@ class FlagListFragment : Fragment(R.layout.fragment_flag_list) {
         flagRecyclerView.adapter = FlagListAdapter { flag, flagViewHolder ->
             FlagListFragmentDirections
                 .actionFlagListFragmentToFlagDetailFragment(flag)
-                .let(view.findNavController()::navigate)
+                .let {
+                    exitTransition = MaterialFade()
+                    val flagTransitionName = flag.country
+                    val extras = FragmentNavigatorExtras(flagViewHolder.flagImageView to flagTransitionName)
+                    view.findNavController().navigate(it, extras)
+                }
         }.apply {
             submitList(listOf(
                 Flag("Austria", R.drawable.austria),
