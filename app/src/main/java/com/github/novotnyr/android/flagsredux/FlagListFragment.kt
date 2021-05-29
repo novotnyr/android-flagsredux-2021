@@ -13,7 +13,7 @@ class FlagListFragment : Fragment(R.layout.fragment_flag_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         flagRecyclerView = view.findViewById(R.id.flagRecyclerView)
-        flagRecyclerView.adapter = FlagListAdapter { flag ->
+        flagRecyclerView.adapter = FlagListAdapter { flag, flagViewHolder ->
             FlagListFragmentDirections
                 .actionFlagListFragmentToFlagDetailFragment(flag)
                 .let(view.findNavController()::navigate)

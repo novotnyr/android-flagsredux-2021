@@ -29,7 +29,7 @@ class FlagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 }
 
-class FlagListAdapter(val clickListener: (Flag) -> Unit) : ListAdapter<Flag, FlagViewHolder>(FlagDiff) {
+class FlagListAdapter(val clickListener: (Flag, FlagViewHolder) -> Unit) : ListAdapter<Flag, FlagViewHolder>(FlagDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlagViewHolder {
         return LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item_flag, parent, false)
@@ -40,7 +40,7 @@ class FlagListAdapter(val clickListener: (Flag) -> Unit) : ListAdapter<Flag, Fla
         val flag = getItem(position)
         holder.bind(flag)
         holder.itemView.setOnClickListener {
-            clickListener(flag)
+            clickListener(flag, holder)
         }
     }
 }
