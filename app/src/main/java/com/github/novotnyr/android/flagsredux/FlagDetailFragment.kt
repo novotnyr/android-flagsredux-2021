@@ -14,5 +14,6 @@ class FlagDetailFragment : Fragment(R.layout.fragment_flag_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         flagImageView = view.findViewById(R.id.flagImageView)
         flagImageView.setImageResource(args.flag.flagResource)
+        flagImageView.transitionName = args.flag.country
     }
 }

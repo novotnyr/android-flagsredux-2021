@@ -25,6 +25,7 @@ class FlagViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(flag: Flag) {
         flagImageView.setImageResource(flag.flagResource)
+        flagImageView.transitionName = flag.country
         countryTextView.text = flag.country
     }
 }
