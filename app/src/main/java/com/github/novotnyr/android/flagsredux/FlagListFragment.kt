@@ -2,6 +2,7 @@ package com.github.novotnyr.android.flagsredux
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
@@ -14,6 +15,9 @@ class FlagListFragment : Fragment(R.layout.fragment_flag_list) {
     private lateinit var flagRecyclerView: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         flagRecyclerView = view.findViewById(R.id.flagRecyclerView)
         flagRecyclerView.adapter = FlagListAdapter { flag, flagViewHolder ->
             FlagListFragmentDirections
